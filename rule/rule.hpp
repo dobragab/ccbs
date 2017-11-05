@@ -24,12 +24,14 @@ class rule
     std::set<ccsh::fs::path> inputs_;
     ccsh::fs::path output_;
     rule_cmd cmd;
+    std::set<ccsh::fs::path> dependencies_;
 
 public:
-    rule(std::set<ccsh::fs::path> inputs, ccsh::fs::path output, rule_cmd cmd)
+    rule(std::set<ccsh::fs::path> inputs, ccsh::fs::path output, rule_cmd cmd, std::set<ccsh::fs::path> dependencies = {})
         : inputs_(std::move(inputs))
         , output_(std::move(output))
         , cmd(std::move(cmd))
+        , dependencies_(std::move(dependencies))
     { }
 
     int make(std::set<package*> const& dependencies)
@@ -45,6 +47,11 @@ public:
     {
         return output_;
     }
+    std::set<ccsh::fs::path> const& dependencies() const
+    {
+        return dependencies_;
+    }
+
 };
 
 void dump_command(ccsh::command_builder<ccsh::gcc> const& rule, std::ostream& os);

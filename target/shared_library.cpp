@@ -78,8 +78,8 @@ void shared_library::prepare()
         rule_ptr dep_rule{new rule{{file}, d_file, dependency_cmd}};
         pkg_copy->make_rule(dep_rule);
 
-        std::set<ccsh::fs::path> obj_deps;
-        auto parser = std::bind(&dependency_parser, std::placeholders::_1, std::ref(obj_deps));
+        std::set<ccsh::fs::path> headers;
+        auto parser = std::bind(&dependency_parser, std::placeholders::_1, std::ref(headers));
 
         ccsh::cat{dep_rule->output()} > parser;
 
@@ -87,9 +87,8 @@ void shared_library::prepare()
         if (!tempdir.empty())
             o_file = tempdir/o_file;
 
-        object_rules.emplace(new rule{{file, dep_rule->output()}, o_file, objects_cmd});
-        obj_deps.insert(file);
-        pkg_copy->add_rule(rule_ptr{new rule{obj_deps, dep_rule->output(), dependency_cmd}});
+        object_rules.emplace(new rule{{file}, o_file, objects_cmd, {dep_rule->output()}});
+        pkg_copy->add_rule(rule_ptr{new rule{{file}, dep_rule->output(), dependency_cmd, headers}});
     }
 
     auto so_gcc = cmd;
