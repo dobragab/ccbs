@@ -49,8 +49,10 @@ void build_package::prepare()
     auto serialized_rules = serialize();
 
     for (auto& rule : serialized_rules)
-        if (rule->make(dependencies) != 0)
+    {
+        if (rule->needs_rebuild() && rule->make(dependencies) != 0)
             break;
+    }
 }
 
 

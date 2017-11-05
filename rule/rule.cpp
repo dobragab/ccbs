@@ -85,5 +85,19 @@ rule_ptr make_rule(rule_cmd const& cmd, std::set<rule_ptr> const& inputs, ccsh::
 }
 
 
+bool rule::needs_rebuild() const
+{
+    if (!ccsh::fs::exists(output_))
+        return true;
+
+    auto outstamp = ccsh::fs::last_write_time(output_);
+
+    auto is_fresher = [outstamp](ccsh::fs::path const& p) {
+        return outstamp < ccsh::fs::last_write_time(p);
+    };
+
+    return std::any_of(inputs_.begin(), inputs_.end(), is_fresher) ||
+        std::any_of(dependencies_.begin(), dependencies_.end(), is_fresher);
+}
 
 }

@@ -76,7 +76,11 @@ void shared_library::prepare()
             d_file = tempdir/d_file;
 
         rule_ptr dep_rule{new rule{{file}, d_file, dependency_cmd}};
-        pkg_copy->make_rule(dep_rule);
+
+        if (!ccsh::fs::exists(d_file) || ccsh::fs::last_write_time(d_file) < ccsh::fs::last_write_time(file))
+        {
+            pkg_copy->make_rule(dep_rule);
+        }
 
         std::set<ccsh::fs::path> headers;
         auto parser = std::bind(&dependency_parser, std::placeholders::_1, std::ref(headers));

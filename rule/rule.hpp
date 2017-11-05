@@ -34,6 +34,8 @@ public:
         , dependencies_(std::move(dependencies))
     { }
 
+    bool needs_rebuild() const;
+
     int make(std::set<package*> const& dependencies)
     {
         return cmd(inputs_, output_, dependencies);
