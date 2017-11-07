@@ -66,9 +66,9 @@ public:
         D.emplace_back(std::move(name), std::move(value));
     }
 
-    void make_rule(rule_ptr const& input)
+    int make_rule(rule_ptr const& input)
     {
-        input->make(dependencies);
+        return input->make(dependencies);
     }
 };
 

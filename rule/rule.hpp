@@ -24,7 +24,10 @@ class rule
     std::set<ccsh::fs::path> inputs_;
     ccsh::fs::path output_;
     rule_cmd cmd;
-    std::set<ccsh::fs::path> dependencies_;
+
+    // sorry
+protected:
+    mutable std::set<ccsh::fs::path> dependencies_;
 
 public:
     rule(std::set<ccsh::fs::path> inputs, ccsh::fs::path output, rule_cmd cmd, std::set<ccsh::fs::path> dependencies = {})
@@ -34,7 +37,7 @@ public:
         , dependencies_(std::move(dependencies))
     { }
 
-    bool needs_rebuild() const;
+    virtual bool needs_rebuild() const;
 
     int make(std::set<package*> const& dependencies)
     {
@@ -58,7 +61,7 @@ public:
 
 void dump_command(ccsh::command_builder<ccsh::gcc> const& rule, std::ostream& os);
 rule_cmd make_rule_cmd(ccsh::command_builder<ccsh::gcc> const& rule);
-std::set<rule_ptr> make_rules(rule_cmd const& cmd, std::set<ccsh::fs::path> const& inputs, path_transformer path_rule, ccsh::fs::path const& temp_dir = {});
+std::set<rule_ptr> make_rules(rule_cmd const& cmd, std::set<ccsh::fs::path> const& inputs, path_transformer path_rule);
 rule_ptr make_rule(rule_cmd const& cmd, std::set<rule_ptr> const& inputs, ccsh::fs::path const& output);
 
 }

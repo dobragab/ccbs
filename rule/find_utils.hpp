@@ -14,6 +14,7 @@ using path_transformer = std::function<ccsh::fs::path(ccsh::fs::path)>;
 std::set<ccsh::fs::path> find_matching(ccsh::fs::path const& dir, std::string const& pattern, int depth = -1);
 path_transformer change_extension(ccsh::fs::path const& to);
 path_transformer add_extension(ccsh::fs::path const& ext);
+path_transformer prefix_dir(ccsh::fs::path const& prefix, path_transformer transformer);
 
 
 }

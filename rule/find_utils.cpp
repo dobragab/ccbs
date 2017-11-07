@@ -29,4 +29,15 @@ path_transformer add_extension(ccsh::fs::path const& ext)
     };
 }
 
+path_transformer prefix_dir(ccsh::fs::path const& prefix, path_transformer transformer)
+{
+    return [prefix, transformer](ccsh::fs::path input) {
+        input = transformer(input);
+        if (!input.empty())
+        {
+            input = ccsh::fs::weakly_canonical(prefix / input);
+        }
+        return input;
+    };}
+
 }

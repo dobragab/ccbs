@@ -58,18 +58,12 @@ rule_cmd make_rule_cmd(ccsh::command_builder<ccsh::gcc> const& rule)
     };
 }
 
-std::set<rule_ptr> make_rules(rule_cmd const& cmd, std::set<ccsh::fs::path> const& inputs, path_transformer path_rule,
-                              std::experimental::filesystem::path const& temp_dir)
+std::set<rule_ptr> make_rules(rule_cmd const& cmd, std::set<ccsh::fs::path> const& inputs, path_transformer path_rule)
 {
     std::set<rule_ptr> result;
     for (const auto& input : inputs)
     {
-        ccsh::fs::path output = path_rule(input);
-        if (!temp_dir.empty())
-        {
-            output = temp_dir / output;
-        }
-        result.emplace(new rule{{input}, output, cmd});
+        result.emplace(new rule{{input}, path_rule(input), cmd});
     }
     return result;
 }
