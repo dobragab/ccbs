@@ -44,28 +44,6 @@ public:
         return time(nullptr);
     }
 
-    using package_flags::include_directories;
-    using package_flags::link_directories;
-    using package_flags::link_libraries;
-    using package_flags::definitions;
-
-    void include_directories(ccsh::fs::path dir)
-    {
-        I.push_back(std::move(dir));
-    }
-    void link_directories(ccsh::fs::path dir)
-    {
-        L.push_back(std::move(dir));
-    }
-    void link_libraries(std::string lib)
-    {
-        l.push_back(std::move(lib));
-    }
-    void definitions(std::string name, std::string value)
-    {
-        D.emplace_back(std::move(name), std::move(value));
-    }
-
     int make_rule(rule_ptr const& input)
     {
         return input->make(dependencies);

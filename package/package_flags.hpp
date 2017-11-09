@@ -31,6 +31,24 @@ public:
     {
         return D;
     }
+
+
+    void include_directories(ccsh::fs::path dir)
+    {
+        I.push_back(ccsh::fs::weakly_canonical(dir));
+    }
+    void link_directories(ccsh::fs::path dir)
+    {
+        L.push_back(ccsh::fs::weakly_canonical(dir));
+    }
+    void link_libraries(std::string lib)
+    {
+        l.push_back(std::move(lib));
+    }
+    void definitions(std::string name, std::string value)
+    {
+        D.emplace_back(std::move(name), std::move(value));
+    }
 };
 
 }

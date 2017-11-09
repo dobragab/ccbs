@@ -38,6 +38,7 @@ path_transformer prefix_dir(ccsh::fs::path const& prefix, path_transformer trans
             input = ccsh::fs::weakly_canonical(prefix / input);
         }
         return input;
-    };}
+    };
+}
 
 }

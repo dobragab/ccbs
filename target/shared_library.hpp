@@ -3,6 +3,7 @@
 
 #include "../package/build_package.hpp"
 #include "../rule/rule.hpp"
+#include "../package/repository.hpp"
 
 namespace ccbs {
 
@@ -57,6 +58,13 @@ public:
     shared_library& depends(package& dep)
     {
         pkg->add_dependency(dep);
+        return *this;
+    }
+
+    template<typename PACKAGE>
+    shared_library& depends()
+    {
+        pkg->add_dependency(repository::get<PACKAGE>());
         return *this;
     }
 
