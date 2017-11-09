@@ -7,9 +7,9 @@ namespace ccbs
 
 void shared_library::prepare()
 {
-    std::shared_ptr<ccbs::build_package> pkg_copy{new ccbs::build_package{*pkg}};
+    build_package pkg_copy = static_cast<build_package&>(*this);
 
-    pkg_copy->add_dependency(*pkg_copy); // sorry.
+    pkg_copy.add_dependency(pkg_copy); // sorry.
 
     auto objects_gcc = cmd;
     objects_gcc.c().PIC();
@@ -46,9 +46,10 @@ void shared_library::prepare()
     auto so_cmd = ccbs::make_rule_cmd(so_gcc);
     auto so_rule = ccbs::make_rule(so_cmd, object_rules, outfile);
 
-    pkg_copy->add_rule(dep_rules);
-    pkg_copy->add_rule(object_rules);
-    pkg_copy->add_rule(so_rule);
-    pkg_copy->prepare();
+    pkg_copy.add_rule(dep_rules);
+    pkg_copy.add_rule(object_rules);
+    pkg_copy.add_rule(so_rule);
+    pkg_copy.prepare();
 }
+
 }

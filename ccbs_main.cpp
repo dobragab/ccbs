@@ -1,11 +1,8 @@
 #include "package/build_package.hpp"
 #include "package/pkg_config_package.hpp"
-#include "rule/find_utils.hpp"
-#include "target/shared_library.hpp"
-#include "package/repository.hpp"
-
-#include "asd b/asd.hpp"
 #include "package/installed_package.hpp"
+
+#include "target/shared_library.hpp"
 
 using namespace ccsh::literals;
 
