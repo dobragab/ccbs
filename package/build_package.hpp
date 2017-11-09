@@ -8,7 +8,7 @@ namespace ccbs {
 
 class build_package : public package_flags
 {
-    std::set<package*> dependencies;
+    std::set<package*> dependencies_;
     std::set<rule_ptr> rules;
 
     std::vector<rule_ptr> serialize();
@@ -26,12 +26,14 @@ public:
 
     void add_dependency(package& package)
     {
-        dependencies.insert(&package);
+        dependencies_.insert(&package);
     }
+
+    std::set<package*> const& dependencies() const { return dependencies_; }
 
     template<typename... ARGS>
     explicit build_package(std::set<package*> dependencies, ARGS const&... rules)
-        : dependencies(std::move(dependencies))
+        : dependencies_(std::move(dependencies))
     {
         using swallow = int[];
         (void)swallow{0, ((void)(add_rule(rules)), 0)...};

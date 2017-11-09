@@ -8,5 +8,7 @@ include_directories(../ccsh/wrappers)
 file(GLOB_RECURSE headers *.hpp)
 file(GLOB sources *.cpp target/*.cpp package/*.cpp rule/*.cpp)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") # ensure C++11
+
 add_executable(ccbs ${sources} ${headers})
 target_link_libraries(ccbs PUBLIC ccsh_lib ${filesystem_lib})

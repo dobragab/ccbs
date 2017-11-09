@@ -41,7 +41,8 @@ public:
 
     void temp_dir(ccsh::fs::path dir) { tempdir = std::move(dir); }
 
-    ccsh::command_builder<ccsh::gcc> command() { return cmd; }
+    ccsh::command_builder<ccsh::gcc>& command() { return cmd; }
+    ccsh::command_builder<ccsh::gcc> command_copy() const { return cmd; }
     ccsh::fs::path const& output() const { return outfile; }
 
     virtual rule_cmd dependency_command() = 0;

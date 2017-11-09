@@ -19,15 +19,15 @@ public:
 
     rule_cmd dependency_command() override
     {
-        return ccbs::make_rule_cmd(command().MM());
+        return ccbs::make_rule_cmd(command_copy().MM());
     }
     rule_cmd object_command() override
     {
-        return ccbs::make_rule_cmd(command().c().PIC());
+        return ccbs::make_rule_cmd(command_copy().c().PIC());
     }
     rule_cmd target_command() override
     {
-        return ccbs::make_rule_cmd(command().shared());
+        return ccbs::make_rule_cmd(command_copy().shared());
     }
 };
 

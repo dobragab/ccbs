@@ -40,9 +40,9 @@ std::vector<ccbs::rule_ptr> build_package::serialize()
 
 void build_package::prepare()
 {
-    dependencies.insert(this);
+    dependencies_.insert(this);
 
-    for (const auto& dep : dependencies)
+    for (const auto& dep : dependencies_)
         if (dep != this)
             dep->prepare();
 
@@ -50,7 +50,7 @@ void build_package::prepare()
 
     for (auto& rule : serialized_rules)
     {
-        if (rule->needs_rebuild() && rule->make(dependencies) != 0)
+        if (rule->needs_rebuild() && rule->make(dependencies_) != 0)
             break;
     }
 }
