@@ -4,60 +4,30 @@
 #include "../package/build_package.hpp"
 #include "../rule/rule.hpp"
 #include "../package/repository.hpp"
+#include "build_target.hpp"
 
 namespace ccbs {
 
 
-class shared_library : public build_package
+class shared_library : public build_target
 {
-    std::set<ccsh::fs::path> files;
-    ccsh::fs::path tempdir;
-    ccsh::fs::path outfile;
-    ccsh::command_builder<ccsh::gcc> cmd;
-
 public:
+    using build_target::build_target;
 
-    shared_library()
-        : build_package({})
-        , cmd{ccsh::gcc()}
-    {}
+    std::vector<ccsh::fs::path> link_directories() const override;
+    std::vector<std::string> link_libraries() const override;
 
-    void prepare() override;
-
-    void sources(std::set<ccsh::fs::path> const& source_files)
+    rule_cmd dependency_command() override
     {
-        files.insert(source_files.begin(), source_files.end());
+        return ccbs::make_rule_cmd(command().MM());
     }
-
-    void sources(ccsh::fs::path const& source_file)
+    rule_cmd object_command() override
     {
-        files.insert(source_file);
+        return ccbs::make_rule_cmd(command().c().PIC());
     }
-
-    void depends(package& dep)
+    rule_cmd target_command() override
     {
-        build_package::add_dependency(dep);
-    }
-
-    template<typename PACKAGE>
-    void depends()
-    {
-        build_package::add_dependency(repository::get<PACKAGE>());
-    }
-
-    void temp_dir(ccsh::fs::path dir)
-    {
-        tempdir = std::move(dir);
-    }
-
-    void output(ccsh::fs::path dir)
-    {
-        outfile = std::move(dir);
-    }
-
-    ccsh::command_builder<ccsh::gcc>& command()
-    {
-        return cmd;
+        return ccbs::make_rule_cmd(command().shared());
     }
 };
 

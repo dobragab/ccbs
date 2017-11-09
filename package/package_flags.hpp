@@ -32,7 +32,6 @@ public:
         return D;
     }
 
-
     void include_directories(ccsh::fs::path dir)
     {
         I.push_back(ccsh::fs::weakly_canonical(dir));

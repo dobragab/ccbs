@@ -16,9 +16,8 @@ struct ccsh_pkg : public ccbs::installed_package
 
 struct ccbs_pkg : public ccbs::shared_library
 {
-    ccbs_pkg()
+    ccbs_pkg() : ccbs::shared_library(CCBS_DOT / "ccbs.so"_p)
     {
-        output("ccbs.so"_p);
         sources(ccbs::find_matching("."_p, "*.cpp", 2));
         temp_dir("/tmp/ccbs"_p);
         depends<ccsh_pkg>();

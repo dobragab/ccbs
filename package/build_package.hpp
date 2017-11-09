@@ -43,11 +43,6 @@ public:
     {
         return time(nullptr);
     }
-
-    int make_rule(rule_ptr const& input)
-    {
-        return input->make(dependencies);
-    }
 };
 
 }
