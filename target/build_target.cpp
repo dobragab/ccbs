@@ -8,8 +8,6 @@ void build_target::prepare()
 {
     build_package pkg_copy = static_cast<build_package&>(*this);
 
-    pkg_copy.add_dependency(pkg_copy); // sorry.
-
     auto objects_cmd = object_command();
     auto dependency_cmd = dependency_command();
     auto so_cmd = target_command();

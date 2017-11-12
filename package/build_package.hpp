@@ -27,9 +27,11 @@ public:
     void add_dependency(package& package)
     {
         dependencies_.insert(&package);
+        for (auto depPtr : package.dependencies())
+            dependencies_.insert(depPtr);
     }
 
-    std::set<package*> const& dependencies() const { return dependencies_; }
+    std::set<package*> dependencies() const override { return dependencies_; }
 
     template<typename... ARGS>
     explicit build_package(std::set<package*> dependencies, ARGS const&... rules)

@@ -22,6 +22,8 @@ public:
     virtual std::vector<std::string> link_libraries() const = 0;
 
     virtual std::vector<std::pair<std::string, std::string>> definitions() const = 0;
+
+    virtual std::set<package*> dependencies() const { return {}; }
 };
 
 }

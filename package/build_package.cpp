@@ -1,5 +1,7 @@
 #include "build_package.hpp"
 
+#include "../util/containers.hpp"
+
 namespace ccbs
 {
 
@@ -40,9 +42,10 @@ std::vector<ccbs::rule_ptr> build_package::serialize()
 
 void build_package::prepare()
 {
-    dependencies_.insert(this);
+    auto dep_copy = dependencies_;
+    dep_copy.insert(this);
 
-    for (const auto& dep : dependencies_)
+    for (const auto& dep : dep_copy)
         if (dep != this)
             dep->prepare();
 
@@ -50,10 +53,9 @@ void build_package::prepare()
 
     for (auto& rule : serialized_rules)
     {
-        if (rule->needs_rebuild() && rule->make(dependencies_) != 0)
+        if (rule->needs_rebuild() && rule->make(dep_copy) != 0)
             break;
     }
 }
-
 
 }
