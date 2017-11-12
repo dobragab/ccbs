@@ -1,8 +1,8 @@
 #ifndef CCBS_BUILD_PACKAGE_HPP
 #define CCBS_BUILD_PACKAGE_HPP
 
-#include "package_flags.hpp"
-#include "../rule/rule.hpp"
+#include <ccbs/package/package_flags.hpp>
+#include <ccbs/rule/rule.hpp>
 
 namespace ccbs {
 

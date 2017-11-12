@@ -1,4 +1,4 @@
-#include "cmake_package.hpp"
+#include <ccbs/package/cmake_package.hpp>
 
 using namespace ccsh::literals;
 

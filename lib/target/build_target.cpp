@@ -1,5 +1,5 @@
-#include "build_target.hpp"
-#include "../rule/dependency_rule.hpp"
+#include <ccbs/target/build_target.hpp>
+#include <ccbs/rule/dependency_rule.hpp>
 
 namespace ccbs
 {

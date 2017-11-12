@@ -1,7 +1,7 @@
 #ifndef PROJECT_CMAKE_PACKAGE_HPP
 #define PROJECT_CMAKE_PACKAGE_HPP
 
-#include "installed_package.hpp"
+#include <ccbs/package/installed_package.hpp>
 
 namespace ccbs {
 

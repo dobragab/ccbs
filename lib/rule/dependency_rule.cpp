@@ -1,4 +1,4 @@
-#include "dependency_rule.hpp"
+#include <ccbs/rule/dependency_rule.hpp>
 
 #include <ccsh/core.hpp>
 

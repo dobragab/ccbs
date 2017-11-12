@@ -1,7 +1,7 @@
 #ifndef PROJECT_CONSOLE_PROGRAM_HPP
 #define PROJECT_CONSOLE_PROGRAM_HPP
 
-#include "build_target.hpp"
+#include <ccbs/target/build_target.hpp>
 
 namespace ccbs
 {

@@ -1,7 +1,7 @@
 #ifndef CCBS_PKG_CONFIG_PACKAGE_HPP
 #define CCBS_PKG_CONFIG_PACKAGE_HPP
 
-#include "package_flags.hpp"
+#include <ccbs/package/package_flags.hpp>
 
 namespace ccbs {
 

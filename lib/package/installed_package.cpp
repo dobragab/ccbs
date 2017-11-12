@@ -1,4 +1,4 @@
-#include "installed_package.hpp"
+#include <ccbs/package/installed_package.hpp>
 
 using namespace ccsh::literals;
 

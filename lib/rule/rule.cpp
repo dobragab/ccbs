@@ -1,4 +1,4 @@
-#include "rule.hpp"
+#include <ccbs/rule/rule.hpp>
 
 namespace ccbs
 {

@@ -1,7 +1,7 @@
 #ifndef CCBS_PACKAGE_HPP
 #define CCBS_PACKAGE_HPP
 
-#include "../rule/timestamp.hpp"
+#include <ccbs/rule/timestamp.hpp>
 
 #include <ccsh/ccsh.hpp>
 

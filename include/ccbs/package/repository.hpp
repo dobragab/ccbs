@@ -1,7 +1,7 @@
 #ifndef CCBS_REPOSITORY_HPP
 #define CCBS_REPOSITORY_HPP
 
-#include "package.hpp"
+#include <ccbs/package/package.hpp>
 
 #include <typeindex>
 #include <unordered_map>

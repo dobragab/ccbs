@@ -1,7 +1,7 @@
 #ifndef PROJECT_INSTALLED_PACKAGE_HPP
 #define PROJECT_INSTALLED_PACKAGE_HPP
 
-#include "package_flags.hpp"
+#include <ccbs/package/package_flags.hpp>
 
 namespace ccbs
 {

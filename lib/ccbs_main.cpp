@@ -1,10 +1,10 @@
-#include "package/build_package.hpp"
-#include "package/pkg_config_package.hpp"
-#include "package/installed_package.hpp"
+#include <ccbs/package/build_package.hpp>
+#include <ccbs/package/pkg_config_package.hpp>
+#include <ccbs/package/installed_package.hpp>
 
-#include "target/shared_library.hpp"
-#include "target/console_program.hpp"
-#include "package/cmake_package.hpp"
+#include <ccbs/target/shared_library.hpp>
+#include <ccbs/target/console_program.hpp>
+#include <ccbs/package/cmake_package.hpp>
 
 using namespace ccsh::literals;
 

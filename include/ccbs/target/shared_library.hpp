@@ -1,10 +1,10 @@
 #ifndef CCSH_SHARED_LIBRARY_HPP
 #define CCSH_SHARED_LIBRARY_HPP
 
-#include "../package/build_package.hpp"
-#include "../rule/rule.hpp"
-#include "../package/repository.hpp"
-#include "build_target.hpp"
+#include <ccbs/package/build_package.hpp>
+#include <ccbs/rule/rule.hpp>
+#include <ccbs/package/repository.hpp>
+#include <ccbs/target/build_target.hpp>
 
 namespace ccbs {
 

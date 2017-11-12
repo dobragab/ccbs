@@ -1,7 +1,7 @@
 #ifndef PROJECT_DEPENDENCY_RULE_HPP
 #define PROJECT_DEPENDENCY_RULE_HPP
 
-#include "rule.hpp"
+#include <ccbs/rule/rule.hpp>
 
 namespace ccbs
 {

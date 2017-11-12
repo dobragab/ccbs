@@ -1,4 +1,4 @@
-#include "repository.hpp"
+#include <ccbs/package/repository.hpp>
 
 namespace ccbs
 {

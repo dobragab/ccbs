@@ -1,9 +1,9 @@
 #ifndef PROJECT_BUILD_TARGET_HPP
 #define PROJECT_BUILD_TARGET_HPP
 
-#include "../package/build_package.hpp"
-#include "../rule/rule.hpp"
-#include "../package/repository.hpp"
+#include <ccbs/package/build_package.hpp>
+#include <ccbs/rule/rule.hpp>
+#include <ccbs/package/repository.hpp>
 
 namespace ccbs {
 

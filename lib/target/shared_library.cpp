@@ -1,4 +1,4 @@
-#include "shared_library.hpp"
+#include <ccbs/target/shared_library.hpp>
 
 using namespace ccsh::literals;
 
