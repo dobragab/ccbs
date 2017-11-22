@@ -8,13 +8,8 @@ namespace ccbs
 std::vector<std::string> shared_library::link_libraries() const
 {
     auto base = package_flags::link_libraries();
-    auto lib = output().filename();
-    lib.replace_extension(""_p);
-    std::string libname = lib.string();
-    if (libname.rfind("lib"))
-        libname = libname.substr(3);
-
-    base.push_back(libname);
+    base.push_back(extract_library_name(output()));
+    return base;
 }
 
 std::vector<ccsh::fs::path> shared_library::link_directories() const

@@ -16,6 +16,7 @@ path_transformer change_extension(ccsh::fs::path const& to);
 path_transformer add_extension(ccsh::fs::path const& ext);
 path_transformer prefix_dir(ccsh::fs::path const& prefix, path_transformer transformer);
 
+std::string extract_library_name(ccsh::fs::path const& p);
 
 }
 

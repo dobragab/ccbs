@@ -41,4 +41,14 @@ path_transformer prefix_dir(ccsh::fs::path const& prefix, path_transformer trans
     };
 }
 
+std::string extract_library_name(ccsh::fs::path const& p)
+{
+    auto lib = p.filename();
+    lib.replace_extension("");
+    std::string libname = lib.string();
+    if (libname.rfind("lib") != std::string::npos)
+        libname = libname.substr(3);
+    return libname;
+}
+
 }
