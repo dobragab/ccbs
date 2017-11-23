@@ -31,5 +31,5 @@ struct ccbs_pkg : public ccbs::console_program
 
 int main()
 {
-    ccbs::repository::get<ccbs_pkg>().prepare();
+    ccbs_pkg{}.build();
 }

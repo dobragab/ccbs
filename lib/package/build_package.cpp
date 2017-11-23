@@ -40,16 +40,16 @@ std::vector<ccbs::rule_ptr> build_package::serialize()
     return result;
 }
 
-void build_package::prepare()
+void build_package::build()
 {
-    auto dep_copy = dependencies_;
-    dep_copy.insert(this);
-
-    for (const auto& dep : dep_copy)
-        if (dep != this)
+    for (const auto& dep : dependencies_)
+        if (dep != static_cast<package*>(&flags_))
             dep->prepare();
 
     auto serialized_rules = serialize();
+
+    auto dep_copy = dependencies_;
+    dep_copy.insert(&flags_);
 
     for (auto& rule : serialized_rules)
     {

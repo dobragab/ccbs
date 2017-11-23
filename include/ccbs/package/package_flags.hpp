@@ -15,6 +15,13 @@ protected:
 
 public:
 
+    timestamp last_modified() const override
+    {
+        return time(nullptr);
+    }
+    void prepare() override
+    { }
+
     std::vector<ccsh::fs::path> include_directories() const override
     {
         return I;

@@ -22,7 +22,7 @@ public:
         , cmd{ccsh::gcc()}
     {}
 
-    void prepare() override;
+    void build() override;
 
     void sources(std::set<ccsh::fs::path> const& source_files)
     {

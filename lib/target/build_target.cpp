@@ -4,7 +4,7 @@
 namespace ccbs
 {
 
-void build_target::prepare()
+void build_target::build()
 {
     build_package pkg_copy = static_cast<build_package&>(*this);
 
@@ -38,9 +38,7 @@ void build_target::prepare()
     pkg_copy.add_rule(dep_rules);
     pkg_copy.add_rule(object_rules);
     pkg_copy.add_rule(so_rule);
-    pkg_copy.prepare();
+    pkg_copy.build();
 }
-
-
 
 }
