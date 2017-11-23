@@ -1,7 +1,7 @@
 #ifndef PROJECT_BUILD_TARGET_HPP
 #define PROJECT_BUILD_TARGET_HPP
 
-#include <ccbs/package/build_package.hpp>
+#include <ccbs/rule/build_package.hpp>
 #include <ccbs/rule/rule.hpp>
 #include <ccbs/package/repository.hpp>
 

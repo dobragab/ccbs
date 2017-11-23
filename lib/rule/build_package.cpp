@@ -1,4 +1,4 @@
-#include <ccbs/package/build_package.hpp>
+#include <ccbs/rule/build_package.hpp>
 
 #include <ccbs/util/containers.hpp>
 

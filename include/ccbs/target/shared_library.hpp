@@ -1,7 +1,7 @@
 #ifndef CCSH_SHARED_LIBRARY_HPP
 #define CCSH_SHARED_LIBRARY_HPP
 
-#include <ccbs/package/build_package.hpp>
+#include <ccbs/rule/build_package.hpp>
 #include <ccbs/rule/rule.hpp>
 #include <ccbs/package/repository.hpp>
 #include <ccbs/target/build_target.hpp>

@@ -2,7 +2,7 @@
 #define CCBS_RULE_HPP
 
 #include <ccbs/package/package.hpp>
-#include <ccbs/rule/find_utils.hpp>
+#include <ccbs/util/find_utils.hpp>
 
 #include <ccsh/ccsh.hpp>
 #include <ccsh/cc.hpp>

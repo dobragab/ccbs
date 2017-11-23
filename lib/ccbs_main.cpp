@@ -1,4 +1,4 @@
-#include <ccbs/package/build_package.hpp>
+#include <ccbs/rule/build_package.hpp>
 #include <ccbs/package/pkg_config_package.hpp>
 #include <ccbs/package/installed_package.hpp>
 
