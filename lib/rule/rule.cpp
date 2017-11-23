@@ -87,7 +87,7 @@ bool rule::needs_rebuild() const
     auto outstamp = ccsh::fs::last_write_time(output_);
 
     auto is_fresher = [outstamp](ccsh::fs::path const& p) {
-        return outstamp < ccsh::fs::last_write_time(p);
+        return !ccsh::fs::exists(p) || outstamp < ccsh::fs::last_write_time(p);
     };
 
     return std::any_of(inputs_.begin(), inputs_.end(), is_fresher) ||
