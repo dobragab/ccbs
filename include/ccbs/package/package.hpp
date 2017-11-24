@@ -19,12 +19,6 @@ public:
 
     virtual timestamp last_modified() const = 0;
 
-    virtual std::vector<ccsh::fs::path> include_directories() const = 0;
-    virtual std::vector<ccsh::fs::path> link_directories() const = 0;
-    virtual std::vector<std::string> link_libraries() const = 0;
-
-    virtual std::vector<std::pair<std::string, std::string>> definitions() const = 0;
-
     virtual std::set<package*> dependencies() const { return {}; }
 
     virtual void add_arguments(compiler&) const = 0;

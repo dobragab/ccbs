@@ -25,12 +25,7 @@ public:
     }
     rule_cmd target_command() override
     {
-        auto command = command_copy();
-        for (auto ptr : dependencies())
-            for (const auto& dir : ptr->link_directories())
-                command->native().args().push_back("-Wl,-rpath," + dir.string());
-
-        return ccbs::make_rule_cmd(command);
+        return ccbs::make_rule_cmd(command_copy());
     }
 };
 

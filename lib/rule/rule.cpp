@@ -28,21 +28,7 @@ rule_cmd make_rule_cmd(jbcoe::polymorphic_value<compiler> const& rule)
         rule_copy->output(output);
 
         for (const auto& pkg : pkgs)
-        {
             pkg->add_arguments(*rule_copy);
-
-            for (const auto& def : pkg->definitions())
-                rule_copy->definition(def.first, def.second);
-
-            for (const auto& include_dir : pkg->include_directories())
-                rule_copy->include_directory(include_dir);
-
-            for (const auto& link_dir : pkg->link_directories())
-                rule_copy->link_directory(link_dir);
-
-            for (const auto& link_lib : pkg->link_libraries())
-                rule_copy->link_library(link_lib);
-        }
 
         ccsh::fs::path output_dir = output.parent_path();
 

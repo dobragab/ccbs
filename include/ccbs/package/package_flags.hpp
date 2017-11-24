@@ -20,24 +20,7 @@ public:
         return time(nullptr);
     }
     void prepare() override { }
-    void add_arguments(compiler&) const override { }
-
-    std::vector<ccsh::fs::path> include_directories() const override
-    {
-        return I;
-    }
-    std::vector<ccsh::fs::path> link_directories() const override
-    {
-        return L;
-    }
-    std::vector<std::string> link_libraries() const override
-    {
-        return l;
-    }
-    std::vector<std::pair<std::string, std::string>> definitions() const override
-    {
-        return D;
-    }
+    void add_arguments(compiler&) const override;
 
     void include_directories(ccsh::fs::path dir)
     {

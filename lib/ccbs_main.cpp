@@ -32,6 +32,7 @@ struct ccbs_pkg : public ccbs::console_program
         sources(ccbs::find_matching(CCBS_DOT, "*.cpp", 3));
         include_directories(CCBS_DOT / "../include"_p);
         temp_dir("/tmp/ccbs"_p);
+        command()->std_version(ccbs::compiler::cpp11);
         depends<pthread_pkg>();
         depends<ccsh_pkg>();
     }

@@ -5,18 +5,10 @@ using namespace ccsh::literals;
 namespace ccbs
 {
 
-std::vector<std::string> shared_library::link_libraries() const
+void shared_library::add_arguments(compiler& cc) const
 {
-    auto base = flags().link_libraries();
-    base.push_back(extract_library_name(output()));
-    return base;
-}
-
-std::vector<ccsh::fs::path> shared_library::link_directories() const
-{
-    auto base = flags().link_directories();
-    base.push_back(output().parent_path());
-    return base;
+    cc.link_directory(output().parent_path());
+    cc.link_library(extract_library_name(output()));
 }
 
 }
