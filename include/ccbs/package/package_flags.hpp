@@ -19,8 +19,8 @@ public:
     {
         return time(nullptr);
     }
-    void prepare() override
-    { }
+    void prepare() override { }
+    void add_arguments(compiler&) const override { }
 
     std::vector<ccsh::fs::path> include_directories() const override
     {

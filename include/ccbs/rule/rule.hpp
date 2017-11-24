@@ -4,6 +4,9 @@
 #include <ccbs/package/package.hpp>
 #include <ccbs/util/find_utils.hpp>
 
+#include <ccbs/compiler/compiler.hpp>
+#include <ccbs/util/polymorphic_value.hpp>
+
 #include <ccsh/ccsh.hpp>
 #include <ccsh/cc.hpp>
 
@@ -60,8 +63,8 @@ public:
     virtual ~rule() = default;
 };
 
-void dump_command(ccsh::command_builder<ccsh::gcc> const& rule, std::ostream& os);
-rule_cmd make_rule_cmd(ccsh::command_builder<ccsh::gcc> const& rule);
+void dump_command(jbcoe::polymorphic_value<compiler> const& rule, std::ostream& os);
+rule_cmd make_rule_cmd(jbcoe::polymorphic_value<compiler> const& rule);
 std::set<rule_ptr> make_rules(rule_cmd const& cmd, std::set<ccsh::fs::path> const& inputs, path_transformer path_rule);
 rule_ptr make_rule(rule_cmd const& cmd, std::set<rule_ptr> const& inputs, ccsh::fs::path const& output);
 

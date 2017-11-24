@@ -3,10 +3,10 @@
 namespace ccbs
 {
 
-void dump_command(ccsh::command_builder<ccsh::gcc> const& rule, std::ostream& os)
+void dump_command(jbcoe::polymorphic_value<compiler> const& rule, std::ostream& os)
 {
-    auto& args = rule.args();
-    os << rule.binary().string() << " ";
+    auto& args = rule->native().args();
+    os << rule->native().binary().string() << " ";
     for (const auto& arg : args)
     {
         os << arg << " ";
@@ -14,7 +14,7 @@ void dump_command(ccsh::command_builder<ccsh::gcc> const& rule, std::ostream& os
     os << std::endl;
 }
 
-rule_cmd make_rule_cmd(ccsh::command_builder<ccsh::gcc> const& rule)
+rule_cmd make_rule_cmd(jbcoe::polymorphic_value<compiler> const& rule)
 {
     return [rule](std::set<ccsh::fs::path> const& inputs,
                   ccsh::fs::path const& output,
@@ -22,25 +22,26 @@ rule_cmd make_rule_cmd(ccsh::command_builder<ccsh::gcc> const& rule)
 
         auto rule_copy = rule;
 
-        auto& args = rule_copy.args();
         for (const auto& p : inputs)
-            args.push_back(p.string());
+            rule_copy->input(p);
 
-        rule_copy.o(output);
+        rule_copy->output(output);
 
         for (const auto& pkg : pkgs)
         {
+            pkg->add_arguments(*rule_copy);
+
             for (const auto& def : pkg->definitions())
-                rule_copy.D(def.first, def.second);
+                rule_copy->definition(def.first, def.second);
 
             for (const auto& include_dir : pkg->include_directories())
-                rule_copy.I(include_dir);
+                rule_copy->include_directory(include_dir);
 
             for (const auto& link_dir : pkg->link_directories())
-                rule_copy.L(link_dir);
+                rule_copy->link_directory(link_dir);
 
             for (const auto& link_lib : pkg->link_libraries())
-                rule_copy.l(link_lib);
+                rule_copy->link_library(link_lib);
         }
 
         ccsh::fs::path output_dir = output.parent_path();
@@ -54,7 +55,7 @@ rule_cmd make_rule_cmd(ccsh::command_builder<ccsh::gcc> const& rule)
 
         dump_command(rule_copy, std::cout);
 
-        return rule_copy.run();
+        return rule_copy->run();
     };
 }
 

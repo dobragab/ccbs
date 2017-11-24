@@ -3,6 +3,8 @@
 
 #include <ccbs/rule/timestamp.hpp>
 
+#include <ccbs/compiler/compiler.hpp>
+
 #include <ccsh/ccsh.hpp>
 
 #include <memory>
@@ -24,6 +26,8 @@ public:
     virtual std::vector<std::pair<std::string, std::string>> definitions() const = 0;
 
     virtual std::set<package*> dependencies() const { return {}; }
+
+    virtual void add_arguments(compiler&) const = 0;
 
     virtual ~package() = default;
 };

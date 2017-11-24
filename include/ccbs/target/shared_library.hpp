@@ -34,18 +34,23 @@ public:
         build();
     }
 
-
     rule_cmd dependency_command() override
     {
-        return ccbs::make_rule_cmd(command_copy().MM());
+        auto cmd = command_copy();
+        cmd->dependency();
+        return ccbs::make_rule_cmd(cmd);
     }
     rule_cmd object_command() override
     {
-        return ccbs::make_rule_cmd(command_copy().c().PIC());
+        auto cmd = command_copy();
+        cmd->object_so();
+        return ccbs::make_rule_cmd(cmd);
     }
     rule_cmd target_command() override
     {
-        return ccbs::make_rule_cmd(command_copy().shared());
+        auto cmd = command_copy();
+        cmd->shared_object();
+        return ccbs::make_rule_cmd(cmd);
     }
 };
 

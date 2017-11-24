@@ -11,20 +11,24 @@ class console_program : public build_target
 public:
     using build_target::build_target;
 
-    virtual rule_cmd dependency_command() override
+    rule_cmd dependency_command() override
     {
-        return ccbs::make_rule_cmd(command_copy().MM());
+        auto cmd = command_copy();
+        cmd->dependency();
+        return ccbs::make_rule_cmd(cmd);
     }
-    virtual rule_cmd object_command() override
+    rule_cmd object_command() override
     {
-        return ccbs::make_rule_cmd(command_copy().c());
+        auto cmd = command_copy();
+        cmd->object();
+        return ccbs::make_rule_cmd(cmd);
     }
-    virtual rule_cmd target_command() override
+    rule_cmd target_command() override
     {
         auto command = command_copy();
         for (auto ptr : dependencies())
             for (const auto& dir : ptr->link_directories())
-            command.args().push_back("-Wl,-rpath," + dir.string());
+                command->native().args().push_back("-Wl,-rpath," + dir.string());
 
         return ccbs::make_rule_cmd(command);
     }
