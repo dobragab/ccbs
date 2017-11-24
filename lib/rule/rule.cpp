@@ -78,7 +78,6 @@ rule_ptr make_rule(rule_cmd const& cmd, std::set<rule_ptr> const& inputs, ccsh::
     return std::make_shared<rule>(std::move(input_files), output, cmd);
 }
 
-
 bool rule::needs_rebuild() const
 {
     if (!ccsh::fs::exists(output_))

@@ -24,6 +24,8 @@ public:
     virtual std::vector<std::pair<std::string, std::string>> definitions() const = 0;
 
     virtual std::set<package*> dependencies() const { return {}; }
+
+    virtual ~package() = default;
 };
 
 }

@@ -17,8 +17,8 @@ std::vector<ccbs::rule_ptr> build_package::serialize()
 
     while (result.size() != num)
     {
-        auto it_end = rules.end();
-        for (auto it = rules.begin(); it != it_end; ++it)
+        size_t rules_size = rules.size();
+        for (auto it = rules.begin(); it != rules.end(); ++it)
         {
             auto& rulePair = *it;
             const auto& ruleInputs = rulePair.second->inputs();
@@ -35,6 +35,8 @@ std::vector<ccbs::rule_ptr> build_package::serialize()
                 rules.erase(it);
             }
         }
+        if (rules_size == rules.size())
+            throw "circular dependency";
     }
 
     return result;

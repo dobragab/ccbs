@@ -56,6 +56,7 @@ public:
     std::set<package*> dependencies() const { return dependencies_; }
 
     virtual void build();
+    virtual ~build_package() = default;
 };
 
 }

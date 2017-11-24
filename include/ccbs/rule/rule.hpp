@@ -57,6 +57,7 @@ public:
         return dependencies_;
     }
 
+    virtual ~rule() = default;
 };
 
 void dump_command(ccsh::command_builder<ccsh::gcc> const& rule, std::ostream& os);
