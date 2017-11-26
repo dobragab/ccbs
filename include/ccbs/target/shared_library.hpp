@@ -11,12 +11,16 @@ namespace ccbs {
 
 class shared_library : public build_target, public package
 {
+    compiler_ptr command_public_ = build_target::command_copy();
 public:
     using build_target::build_target;
 
+    compiler_ptr& command_public() { return command_public_; }
+    compiler_ptr const& command_public() const { return command_public_; }
+
     std::set<package*> dependencies() const override
     {
-        return flags().dependencies();
+        return build_package::dependencies();
     }
     void prepare() override
     {

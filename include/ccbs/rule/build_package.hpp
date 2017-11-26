@@ -8,32 +8,10 @@ namespace ccbs {
 
 class build_package
 {
-    package_flags flags_;
     std::set<package*> dependencies_;
     std::set<rule_ptr> rules;
 
     std::vector<rule_ptr> serialize();
-
-protected:
-    package_flags& flags() { return flags_; }
-    package_flags const& flags() const { return flags_; }
-
-    void include_directories(ccsh::fs::path dir)
-    {
-        flags_.include_directories(std::move(dir));
-    }
-    void link_directories(ccsh::fs::path dir)
-    {
-        flags_.link_directories(std::move(dir));
-    }
-    void link_libraries(std::string lib)
-    {
-        flags_.link_libraries(std::move(lib));
-    }
-    void definitions(std::string name, std::string value)
-    {
-        flags_.definitions(std::move(name), std::move(value));
-    }
 
 public:
 

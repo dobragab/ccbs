@@ -2,6 +2,7 @@
 #define PROJECT_COMPILER_HPP
 
 #include <ccsh/ccsh.hpp>
+#include <ccbs/util/polymorphic_value.hpp>
 
 namespace ccbs
 {
@@ -59,6 +60,7 @@ public:
     ccsh::command_builder<Impl> const& impl() const { return impl_; }
 };
 
+using compiler_ptr = jbcoe::polymorphic_value<compiler>;
 
 }
 

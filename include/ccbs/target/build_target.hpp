@@ -14,14 +14,13 @@ class build_target : public build_package
     std::set<ccsh::fs::path> files;
     ccsh::fs::path tempdir;
     ccsh::fs::path outfile;
-    jbcoe::polymorphic_value<compiler> cmd;
+    compiler_ptr cmd;
 
 public:
 
-    explicit build_target(ccsh::fs::path output)
-        : build_package({})
-        , outfile(std::move(output))
-        , cmd{jbcoe::make_polymorphic_value<gcc>(ccsh::gcc{})}
+    explicit build_target(ccsh::fs::path output, compiler_ptr cmd = jbcoe::make_polymorphic_value<gcc>(ccsh::gcc{}))
+        : outfile(std::move(output))
+        , cmd(std::move(cmd))
     {}
 
     void build() override;
@@ -43,8 +42,8 @@ public:
 
     void temp_dir(ccsh::fs::path dir) { tempdir = std::move(dir); }
 
-    jbcoe::polymorphic_value<compiler>& command() { return cmd; }
-    jbcoe::polymorphic_value<compiler> command_copy() const { return cmd; }
+    compiler_ptr& command() { return cmd; }
+    compiler_ptr command_copy() const { return cmd; }
 
     ccsh::fs::path const& output() const { return outfile; }
 

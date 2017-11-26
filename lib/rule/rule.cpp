@@ -3,7 +3,7 @@
 namespace ccbs
 {
 
-void dump_command(jbcoe::polymorphic_value<compiler> const& rule, std::ostream& os)
+void dump_command(compiler_ptr const& rule, std::ostream& os)
 {
     auto& args = rule->native().args();
     os << rule->native().binary().string() << " ";
@@ -14,7 +14,7 @@ void dump_command(jbcoe::polymorphic_value<compiler> const& rule, std::ostream& 
     os << std::endl;
 }
 
-rule_cmd make_rule_cmd(jbcoe::polymorphic_value<compiler> const& rule)
+rule_cmd make_rule_cmd(compiler_ptr const& rule)
 {
     return [rule](std::set<ccsh::fs::path> const& inputs,
                   ccsh::fs::path const& output,
