@@ -47,7 +47,7 @@ template<typename Base, typename FuncHead, typename... FuncTail>
 bool visit_all_impl(Base& base, FuncHead&& funcHead, FuncTail&&... funcTail)
 {
     return visit_one(base, std::forward<FuncHead>(funcHead)) || visit_all_impl(base, std::forward<FuncTail>(funcTail)...);
-};
+}
 
 } // namespace detail
 
@@ -55,7 +55,7 @@ template<typename Base, typename... Func>
 bool visit_all(Base& base, Func&&... func)
 {
     return detail::visit_all_impl(base, std::forward<Func>(func)...);
-};
+}
 
 
 }

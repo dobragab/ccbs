@@ -58,6 +58,8 @@ public:
     virtual rule_cmd dependency_command() = 0;
     virtual rule_cmd object_command() = 0;
     virtual rule_cmd target_command() = 0;
+
+    virtual ~build_target() = default;
 };
 
 }

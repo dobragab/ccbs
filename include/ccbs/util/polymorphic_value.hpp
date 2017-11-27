@@ -406,7 +406,7 @@ public:
 
     explicit operator bool() const
     {
-        return (bool)cb_;
+        return bool(cb_);
     }
 
     const T* operator->() const
