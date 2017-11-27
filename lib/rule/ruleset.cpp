@@ -42,18 +42,24 @@ std::vector<ccbs::rule_ptr> ruleset::serialize()
     return result;
 }
 
-void ruleset::build(std::set<package*> const& dependencies)
+int ruleset::build(std::set<package*> const& dependencies)
 {
     for (const auto& dep : dependencies)
-        dep->prepare();
+    {
+        int result = dep->prepare();
+        if (result != 0)
+            return result;
+    }
 
     auto serialized_rules = serialize();
 
+    int last_result = 0;
     for (auto& rule : serialized_rules)
     {
-        if (rule->needs_rebuild() && rule->make(dependencies) != 0)
+        if (rule->needs_rebuild() && (last_result = rule->make(dependencies)) != 0)
             break;
     }
+    return last_result;
 }
 
 }

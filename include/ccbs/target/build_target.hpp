@@ -24,7 +24,7 @@ public:
         , cmd(std::move(cmd))
     {}
 
-    void build();
+    int build();
 
     void sources(std::set<ccsh::fs::path> const& source_files)
     {

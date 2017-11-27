@@ -22,7 +22,7 @@ public:
         rules.insert(input);
     }
 
-    void build(std::set<package*> const& dependencies);
+    int build(std::set<package*> const& dependencies);
 };
 
 }

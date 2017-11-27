@@ -12,7 +12,7 @@ class cmake_package : public ccbs::installed_package
 public:
     using installed_package::installed_package;
 
-    void prepare() override;
+    int prepare() override;
 
     void add_option(std::string key, std::string value)
     {

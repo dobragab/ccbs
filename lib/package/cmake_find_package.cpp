@@ -5,7 +5,7 @@ using namespace ccsh::literals;
 
 namespace ccbs {
 
-void cmake_find_package::prepare()
+int cmake_find_package::prepare()
 {
     std::vector<std::string> default_arguments = {
         "--find-package",
@@ -64,8 +64,7 @@ void cmake_find_package::prepare()
     ccsh::command compile_options = ccsh::shell("cmake"_p, compile_arguments) > ccsh::internal::line_splitter_make(process_compile, ' ');
     ccsh::command link_options = ccsh::shell("cmake"_p, link_arguments) > ccsh::internal::line_splitter_make(process_link, ' ');
 
-    if ((compile_options && link_options).run() != 0)
-        throw "up";
+    return (compile_options && link_options).run();
 }
 
 }

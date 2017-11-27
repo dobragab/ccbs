@@ -15,7 +15,7 @@ public:
     ccsh::fs::path& basedir() { return basedir_; }
     ccsh::fs::path const& basedir() const { return basedir_; }
 
-    void prepare() override {}
+    int prepare() override { return 0; }
     timestamp last_modified() const override
     {
         // TODO: find latest library

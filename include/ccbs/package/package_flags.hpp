@@ -19,7 +19,7 @@ public:
     {
         return time(nullptr);
     }
-    void prepare() override { }
+    int prepare() override { return 0; }
     void add_arguments(compiler&) const override;
 
     void include_directories(ccsh::fs::path dir)

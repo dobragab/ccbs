@@ -15,10 +15,10 @@ public:
         , pkg_name(std::move(pkg_name))
     { }
     
-    void prepare() override
+    int prepare() override
     {
         std::string output;
-        (ccsh::shell("pkg-config", {"--libs-only-l", pkg_name}) > output).run();
+        return (ccsh::shell("pkg-config", {"--libs-only-l", pkg_name}) > output).run();
     }
     timestamp last_modified() const override
     {

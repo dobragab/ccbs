@@ -4,7 +4,7 @@
 namespace ccbs
 {
 
-void build_target::build()
+int build_target::build()
 {
     auto objects_cmd = object_command();
     auto dependency_cmd = dependency_command();
@@ -37,7 +37,7 @@ void build_target::build()
     target.add_rules(dep_rules);
     target.add_rules(object_rules);
     target.add_rule(so_rule);
-    target.build(dependencies());
+    return target.build(dependencies());
 }
 
 }

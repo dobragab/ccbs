@@ -22,9 +22,9 @@ public:
     {
         return build_target::dependencies();
     }
-    void prepare() override
+    int prepare() override
     {
-        build();
+        return build();
     }
     void add_arguments(compiler& cc) const override;
 

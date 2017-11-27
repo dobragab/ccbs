@@ -15,7 +15,7 @@ namespace ccbs {
 class package
 {
 public:
-    virtual void prepare() = 0;
+    virtual int prepare() = 0;
 
     virtual timestamp last_modified() const = 0;
 
