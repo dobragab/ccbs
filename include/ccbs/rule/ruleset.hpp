@@ -13,7 +13,7 @@ class ruleset
 
 public:
 
-    void add_rule(std::set<rule_ptr> const& inputs)
+    void add_rules(std::set<rule_ptr> const& inputs)
     {
         rules.insert(inputs.begin(), inputs.end());
     }

@@ -34,8 +34,8 @@ void build_target::build()
     auto so_rule = ccbs::make_rule(so_cmd, object_rules, outfile);
 
     ruleset target;
-    target.add_rule(dep_rules);
-    target.add_rule(object_rules);
+    target.add_rules(dep_rules);
+    target.add_rules(object_rules);
     target.add_rule(so_rule);
     target.build(dependencies());
 }
