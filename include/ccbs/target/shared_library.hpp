@@ -1,7 +1,7 @@
 #ifndef CCSH_SHARED_LIBRARY_HPP
 #define CCSH_SHARED_LIBRARY_HPP
 
-#include <ccbs/rule/build_package.hpp>
+#include <ccbs/rule/ruleset.hpp>
 #include <ccbs/rule/rule.hpp>
 #include <ccbs/package/repository.hpp>
 #include <ccbs/target/build_target.hpp>
@@ -20,7 +20,7 @@ public:
 
     std::set<package*> dependencies() const override
     {
-        return build_package::dependencies();
+        return build_target::dependencies();
     }
     void prepare() override
     {

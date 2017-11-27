@@ -6,8 +6,6 @@ namespace ccbs
 
 void build_target::build()
 {
-    build_package pkg_copy = static_cast<build_package&>(*this);
-
     auto objects_cmd = object_command();
     auto dependency_cmd = dependency_command();
     auto so_cmd = target_command();
@@ -35,10 +33,11 @@ void build_target::build()
 
     auto so_rule = ccbs::make_rule(so_cmd, object_rules, outfile);
 
-    pkg_copy.add_rule(dep_rules);
-    pkg_copy.add_rule(object_rules);
-    pkg_copy.add_rule(so_rule);
-    pkg_copy.build();
+    ruleset target;
+    target.add_rule(dep_rules);
+    target.add_rule(object_rules);
+    target.add_rule(so_rule);
+    target.build(dependencies());
 }
 
 }

@@ -6,11 +6,9 @@
 
 namespace ccbs {
 
-class build_package
+class ruleset
 {
-    std::set<package*> dependencies_;
     std::set<rule_ptr> rules;
-
     std::vector<rule_ptr> serialize();
 
 public:
@@ -24,17 +22,7 @@ public:
         rules.insert(input);
     }
 
-    void add_dependency(package& package)
-    {
-        dependencies_.insert(&package);
-        for (auto depPtr : package.dependencies())
-            dependencies_.insert(depPtr);
-    }
-
-    std::set<package*> dependencies() const { return dependencies_; }
-
-    virtual void build();
-    virtual ~build_package() = default;
+    void build(std::set<package*> const& dependencies);
 };
 
 }

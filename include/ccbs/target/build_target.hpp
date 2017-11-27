@@ -1,7 +1,7 @@
 #ifndef PROJECT_BUILD_TARGET_HPP
 #define PROJECT_BUILD_TARGET_HPP
 
-#include <ccbs/rule/build_package.hpp>
+#include <ccbs/rule/ruleset.hpp>
 #include <ccbs/rule/rule.hpp>
 #include <ccbs/package/repository.hpp>
 #include <ccbs/util/polymorphic_value.hpp>
@@ -9,8 +9,9 @@
 
 namespace ccbs {
 
-class build_target : public build_package
+class build_target
 {
+    std::set<package*> dependencies_;
     std::set<ccsh::fs::path> files;
     ccsh::fs::path tempdir;
     ccsh::fs::path outfile;
@@ -23,7 +24,7 @@ public:
         , cmd(std::move(cmd))
     {}
 
-    void build() override;
+    void build();
 
     void sources(std::set<ccsh::fs::path> const& source_files)
     {
@@ -35,10 +36,17 @@ public:
         files.insert(source_file);
     }
 
-    void depends(package& dep) { build_package::add_dependency(dep); }
+    std::set<package*> const& dependencies() const { return dependencies_; }
+
+    void add_dependency(package& package)
+    {
+        dependencies_.insert(&package);
+        for (auto depPtr : package.dependencies())
+            dependencies_.insert(depPtr);
+    }
 
     template<typename PACKAGE>
-    void depends() { depends(repository::get<PACKAGE>()); }
+    void depends() { add_dependency(repository::get<PACKAGE>()); }
 
     void temp_dir(ccsh::fs::path dir) { tempdir = std::move(dir); }
 

@@ -1,11 +1,11 @@
-#include <ccbs/rule/build_package.hpp>
+#include <ccbs/rule/ruleset.hpp>
 
 #include <ccbs/util/containers.hpp>
 
 namespace ccbs
 {
 
-std::vector<ccbs::rule_ptr> build_package::serialize()
+std::vector<ccbs::rule_ptr> ruleset::serialize()
 {
     std::map<ccsh::fs::path, rule_ptr> rules;
     for (auto& rule : this->rules)
@@ -42,19 +42,16 @@ std::vector<ccbs::rule_ptr> build_package::serialize()
     return result;
 }
 
-void build_package::build()
+void ruleset::build(std::set<package*> const& dependencies)
 {
-    for (const auto& dep : dependencies_)
+    for (const auto& dep : dependencies)
         dep->prepare();
 
     auto serialized_rules = serialize();
 
-    // auto dep_copy = dependencies_;
-    // dep_copy.insert(&flags_);
-
     for (auto& rule : serialized_rules)
     {
-        if (rule->needs_rebuild() && rule->make(dependencies_) != 0)
+        if (rule->needs_rebuild() && rule->make(dependencies) != 0)
             break;
     }
 }
