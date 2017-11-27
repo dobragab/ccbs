@@ -45,6 +45,10 @@ public:
     {
         impl().L(path);
     }
+    void add_rpath(ccsh::fs::path const& path)
+    {
+        native().args().push_back("-Wl,-rpath," + path.string());
+    }
     void link_library(std::string const& lib) override
     {
         impl().l(lib);

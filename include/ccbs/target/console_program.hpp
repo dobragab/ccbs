@@ -2,6 +2,7 @@
 #define PROJECT_CONSOLE_PROGRAM_HPP
 
 #include <ccbs/target/build_target.hpp>
+#include <ccbs/util/visitors.hpp>
 
 namespace ccbs
 {
@@ -25,7 +26,17 @@ public:
     }
     rule_cmd target_command() override
     {
-        return ccbs::make_rule_cmd(command_copy());
+        auto cmd = command_copy();
+        visit_one(*cmd, [this](ccbs::gcc& cc) {
+            ccbs::gcc cc_copy{ccsh::gcc{}};
+            for (const auto& depPtr : dependencies())
+                depPtr->add_arguments(cc_copy);
+            for (const auto& arg : cc_copy.native().args())
+                if (arg.rfind("-L") != std::string::npos)
+                    cc.add_rpath(arg.substr(2));
+        });
+
+        return ccbs::make_rule_cmd(cmd);
     }
 };
 

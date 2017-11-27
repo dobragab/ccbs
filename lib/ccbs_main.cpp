@@ -27,7 +27,7 @@ struct ccsh_pkg : public ccbs::cmake_package
 
 struct ccbs_pkg : public ccbs::console_program
 {
-    ccbs_pkg() : ccbs::console_program(CCBS_DOT / "ccbs2"_p)
+    ccbs_pkg() : ccbs::console_program(CCBS_DOT / "../ccbs2"_p)
     {
         sources(ccbs::find_matching(CCBS_DOT, "*.cpp", 3));
         command()->include_directory(CCBS_DOT / "../include"_p);
