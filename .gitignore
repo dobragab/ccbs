@@ -46,6 +46,8 @@ Makefile
 *.cmake
 compile_commands.json
 
+!include/*.cmake
+
 # IDE files
 *.depend
 *.layout
@@ -58,3 +60,7 @@ compile_commands.json
 
 # Coverage reports
 coverage/*
+
+#Doxygen
+!Doxyfile
+html/*
