@@ -27,10 +27,7 @@ class rule
     std::set<ccsh::fs::path> inputs_;
     ccsh::fs::path output_;
     rule_cmd cmd;
-
-    // sorry
-protected:
-    mutable std::set<ccsh::fs::path> dependencies_;
+    std::set<ccsh::fs::path> dependencies_;
 
 public:
     rule(std::set<ccsh::fs::path> inputs, ccsh::fs::path output, rule_cmd cmd, std::set<ccsh::fs::path> dependencies = {})

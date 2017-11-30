@@ -70,9 +70,11 @@ bool dependency_rule::needs_rebuild() const
 
         (ccsh::cat{this->output()} > parser).run();
 
-        this->dependencies_.clear();
+        auto& deps = const_cast<std::set<ccsh::fs::path>&>(dependencies()); // sorry
+
+        deps.clear();
         for (const auto& header : headers)
-            this->dependencies_.insert(header);
+            deps.insert(header);
 
         last_read = filestamp;
     }
