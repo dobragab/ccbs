@@ -36,7 +36,7 @@ public:
     timestamp last_modified() const override
     {
         // TODO: find latest library
-        return {0};
+        return to_timestamp(0);
     }
 };
 

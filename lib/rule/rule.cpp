@@ -45,24 +45,14 @@ rule_cmd make_rule_cmd(compiler_ptr const& rule)
     };
 }
 
-std::set<rule_ptr> make_rules(rule_cmd const& cmd, std::set<ccsh::fs::path> const& inputs, path_transformer path_rule)
+std::set<ccsh::fs::path> rule_outputs(std::set<rule_ptr> const& rules)
 {
-    std::set<rule_ptr> result;
-    for (const auto& input : inputs)
+    std::set<ccsh::fs::path> output_files;
+    for (const auto& input : rules)
     {
-        result.emplace(new rule{{input}, path_rule(input), cmd});
+        output_files.insert(input->output());
     }
-    return result;
-}
-
-rule_ptr make_rule(rule_cmd const& cmd, std::set<rule_ptr> const& inputs, ccsh::fs::path const& output)
-{
-    std::set<ccsh::fs::path> input_files;
-    for (const auto& input : inputs)
-    {
-        input_files.insert(input->output());
-    }
-    return std::make_shared<rule>(std::move(input_files), output, cmd);
+    return output_files;
 }
 
 bool rule::needs_rebuild() const

@@ -17,7 +17,7 @@ public:
 
     timestamp last_modified() const override
     {
-        return time(nullptr);
+        return to_timestamp(0);
     }
     int prepare() override { return 0; }
     void add_arguments(compiler&) const override;

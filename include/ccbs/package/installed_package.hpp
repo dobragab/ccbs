@@ -19,7 +19,7 @@ public:
     timestamp last_modified() const override
     {
         // TODO: find latest library
-        return timestamp(0);
+        return to_timestamp(0);
     }
 };
 

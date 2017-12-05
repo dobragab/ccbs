@@ -62,8 +62,7 @@ public:
 
 void dump_command(compiler_ptr const& rule, std::ostream& os);
 rule_cmd make_rule_cmd(compiler_ptr const& rule);
-std::set<rule_ptr> make_rules(rule_cmd const& cmd, std::set<ccsh::fs::path> const& inputs, path_transformer path_rule);
-rule_ptr make_rule(rule_cmd const& cmd, std::set<rule_ptr> const& inputs, ccsh::fs::path const& output);
+std::set<ccsh::fs::path> rule_outputs(std::set<rule_ptr> const& rules);
 
 }
 

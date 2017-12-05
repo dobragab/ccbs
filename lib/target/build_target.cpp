@@ -1,5 +1,6 @@
 #include <ccbs/target/build_target.hpp>
 #include <ccbs/rule/dependency_rule.hpp>
+#include <ccbs/rule/link_rule.hpp>
 
 namespace ccbs
 {
@@ -31,7 +32,7 @@ int build_target::build()
         });
     }
 
-    auto so_rule = ccbs::make_rule(so_cmd, object_rules, outfile);
+    auto so_rule = std::make_shared<link_rule>(rule_outputs(object_rules), outfile, so_cmd, std::set<ccsh::fs::path>{}, dependencies());
 
     ruleset target;
     target.add_rules(dep_rules);
@@ -39,5 +40,6 @@ int build_target::build()
     target.add_rule(so_rule);
     return target.build(dependencies());
 }
+
 
 }

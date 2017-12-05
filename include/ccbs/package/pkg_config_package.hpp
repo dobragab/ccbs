@@ -22,7 +22,7 @@ public:
     }
     timestamp last_modified() const override
     {
-        return timestamp{0};
+        return to_timestamp(0);
     }
 };
 
