@@ -18,6 +18,44 @@ std::vector<T>& merge_vectors(std::vector<T>& target_, std::vector<T> items_)
     return target_;
 }
 
+template<typename ELEMENT, typename KEY_FUNC, typename VALUE_FUNC>
+std::vector<ELEMENT> serialize_set(std::set<ELEMENT> const& rules_, KEY_FUNC&& key_func, VALUE_FUNC&& value_func)
+{
+    using KEY = decltype(key_func(*rules_.begin()));
+    std::map<KEY, ELEMENT> rules;
+    for (auto& rule : rules_)
+        rules.insert(std::make_pair(key_func(rule), rule));
+
+    std::vector<ELEMENT> result;
+    auto num = rules.size();
+    result.reserve(num);
+
+    while (result.size() != num)
+    {
+        size_t rules_size = rules.size();
+        for (auto it = rules.begin(); it != rules.end(); ++it)
+        {
+            const auto& ruleInputs = value_func(it->second);
+            bool hasUnresolvedInput = std::any_of(
+                ruleInputs.begin(),
+                ruleInputs.end(),
+                [&] (const KEY& input) {
+                    return bool(rules.count(input));
+                });
+
+            if (!hasUnresolvedInput)
+            {
+                result.push_back(it->second);
+                rules.erase(it);
+            }
+        }
+        if (rules_size == rules.size())
+            throw "circular dependency";
+    }
+
+    return result;
+}
+
 }
 
 #endif //PROJECT_CONTAINERS_HPP

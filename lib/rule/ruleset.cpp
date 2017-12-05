@@ -5,53 +5,26 @@
 namespace ccbs
 {
 
-std::vector<ccbs::rule_ptr> ruleset::serialize()
-{
-    std::map<ccsh::fs::path, rule_ptr> rules;
-    for (auto& rule : this->rules)
-        rules.emplace(rule->output(), rule);
-
-    std::vector<rule_ptr> result;
-    auto num = rules.size();
-    result.reserve(num);
-
-    while (result.size() != num)
-    {
-        size_t rules_size = rules.size();
-        for (auto it = rules.begin(); it != rules.end(); ++it)
-        {
-            auto& rulePair = *it;
-            const auto& ruleInputs = rulePair.second->inputs();
-            bool hasUnresolvedInput = std::any_of(
-                ruleInputs.begin(),
-                ruleInputs.end(),
-                [&] (const ccsh::fs::path& input) {
-                    return bool(rules.count(input));
-                });
-
-            if (!hasUnresolvedInput)
-            {
-                result.push_back(rulePair.second);
-                rules.erase(it);
-            }
-        }
-        if (rules_size == rules.size())
-            throw "circular dependency";
-    }
-
-    return result;
-}
-
 int ruleset::build(std::set<package*> const& dependencies)
 {
-    for (const auto& dep : dependencies)
+    auto serialized_deps = serialize_set(
+        dependencies,
+        [](package* dep) { return dep; },
+        [](package* dep) { return dep->dependencies(); }
+    );
+
+    for (const auto& dep : serialized_deps)
     {
         int result = dep->prepare();
         if (result != 0)
             return result;
     }
 
-    auto serialized_rules = serialize();
+    auto serialized_rules = serialize_set(
+        this->rules,
+        [](rule_ptr const& rule) { return rule->output(); },
+        [](rule_ptr const& rule) { return rule->inputs(); }
+    );
 
     int last_result = 0;
     for (auto& rule : serialized_rules)

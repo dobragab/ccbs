@@ -9,7 +9,6 @@ namespace ccbs {
 class ruleset
 {
     std::set<rule_ptr> rules;
-    std::vector<rule_ptr> serialize();
 
 public:
 
