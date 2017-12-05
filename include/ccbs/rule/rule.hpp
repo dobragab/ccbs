@@ -39,7 +39,7 @@ public:
 
     virtual bool needs_rebuild() const;
 
-    int make(std::set<package*> const& dependencies)
+    virtual int make(std::set<package*> const& dependencies)
     {
         return cmd(inputs_, output_, dependencies);
     }
