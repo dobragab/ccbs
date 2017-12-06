@@ -2,6 +2,7 @@
 #define PROJECT_CONTAINERS_HPP
 
 #include <vector>
+#include <set>
 
 namespace ccbs
 {

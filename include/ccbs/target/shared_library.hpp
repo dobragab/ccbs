@@ -46,6 +46,11 @@ public:
         cmd->shared_object();
         return ccbs::make_rule_cmd(cmd);
     }
+
+    timestamp last_modified() const override
+    {
+        return ccsh::fs::last_write_time(build_target::output());
+    }
 };
 
 }
