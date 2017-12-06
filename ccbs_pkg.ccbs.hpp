@@ -9,7 +9,9 @@ struct pthread_pkg : public ccbs::package_flags
 {
     void add_arguments(ccbs::compiler& compiler) const override
     {
-        ccbs::visit_one(compiler, [](ccbs::gcc& cc) { cc.native().args().emplace_back("-pthread"); });
+        ccbs::visit_one(compiler, [](ccbs::gcc& cc) {
+            cc.native().args().emplace_back("-pthread");
+        });
     }
 };
 
@@ -19,14 +21,18 @@ struct ccsh_pkg : public ccbs::cmake_package
     {
         include_directories(basedir() / "wrappers"_p);
     }
+    std::set<package*> dependencies() const override
+    {
+        return { &ccbs::repository::get<pthread_pkg>() };
+    }
 };
 
 struct ccbs_pkg : public ccbs::shared_library
 {
-    ccbs_pkg() : ccbs::shared_library(CCBS_DOT / "../ccbs2"_p)
+    ccbs_pkg() : ccbs::shared_library(CCBS_DOT / "../libccbs2.so"_p)
     {
         sources(ccbs::find_matching(CCBS_DOT / "lib", "*.cpp", 3));
-        command()->include_directory(CCBS_DOT / "include"_p);
+        command_public()->include_directory(CCBS_DOT / "include"_p);
         temp_dir("/tmp/ccbs"_p);
         command()->std_version(ccbs::compiler::cpp11);
         depends<pthread_pkg>();

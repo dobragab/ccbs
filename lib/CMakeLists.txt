@@ -5,7 +5,7 @@ set(SHARED_LIB_INCLUDE_DIR ${SHARED_LIB_INCLUDE_DIR} PARENT_SCOPE)
 
 if(NOT TARGET ccbs_lib) # "include guard"
 
-file(GLOB_RECURSE headers ../include/*.hpp)
+file(GLOB_RECURSE headers ../*.hpp)
 file(GLOB_RECURSE sources *.cpp)
 
 add_library(ccbs_lib SHARED ${sources} ${headers})
