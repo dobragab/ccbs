@@ -21,7 +21,7 @@ public:
         rules.insert(input);
     }
 
-    int build(std::set<package*> const& dependencies);
+    int build(std::set<package*> const& dependencies, options&);
     static int build_dependencies(std::set<package*> const& dependencies, options&);
 };
 

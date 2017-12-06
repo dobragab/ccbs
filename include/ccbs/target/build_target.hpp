@@ -25,7 +25,7 @@ public:
     {}
 
     virtual int build_dependencies(options&);
-    virtual int build_rules();
+    virtual int build_rules(options&);
     virtual int build(options&);
 
     void sources(std::set<ccsh::fs::path> const& source_files)

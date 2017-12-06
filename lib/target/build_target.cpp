@@ -10,7 +10,7 @@ int build_target::build_dependencies(options& options_)
     return ruleset::build_dependencies(dependencies(), options_);
 }
 
-int build_target::build_rules()
+int build_target::build_rules(options& options_)
 {
     auto objects_cmd = object_command();
     auto dependency_cmd = dependency_command();
@@ -43,7 +43,7 @@ int build_target::build_rules()
     target.add_rules(dep_rules);
     target.add_rules(object_rules);
     target.add_rule(so_rule);
-    return target.build(dependencies());
+    return target.build(dependencies(), options_);
 }
 
 int build_target::build(options& options_)
@@ -52,7 +52,7 @@ int build_target::build(options& options_)
     if (result1 != 0)
         return result1;
 
-    return build_rules();
+    return build_rules(options_);
 }
 
 }
