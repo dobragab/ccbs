@@ -31,7 +31,7 @@ struct ccbs_pkg : public ccbs::shared_library
 {
     ccbs_pkg() : ccbs::shared_library(CCBS_DOT / "../libccbs2.so"_p)
     {
-        sources(ccbs::find_matching(CCBS_DOT / "lib", "*.cpp", 3));
+        sources(ccbs::find_matching(CCBS_DOT / "lib"_p, "*.cpp", 3));
         command_public()->include_directory(CCBS_DOT / "include"_p);
         temp_dir("/tmp/ccbs"_p);
         command()->std_version(ccbs::compiler::cpp11);

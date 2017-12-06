@@ -32,18 +32,24 @@ public:
     {
         auto cmd = command_copy();
         cmd->dependency();
+        for (const auto& arg : command_public_->native().args())
+            cmd->native().args().push_back(arg);
         return ccbs::make_rule_cmd(cmd);
     }
     rule_cmd object_command() override
     {
         auto cmd = command_copy();
         cmd->object_so();
+        for (const auto& arg : command_public_->native().args())
+            cmd->native().args().push_back(arg);
         return ccbs::make_rule_cmd(cmd);
     }
     rule_cmd target_command() override
     {
         auto cmd = command_copy();
         cmd->shared_object();
+        for (const auto& arg : command_public_->native().args())
+            cmd->native().args().push_back(arg);
         return ccbs::make_rule_cmd(cmd);
     }
 

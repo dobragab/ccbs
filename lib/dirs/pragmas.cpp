@@ -38,6 +38,8 @@ std::vector<ccsh::fs::path> get_all_pragmas(ccsh::command_builder<ccsh::gcc>& co
         {
             if (std::find(includes.begin(), includes.end(), parts[2]) == includes.end())
             {
+                // TODO: handle relative paths
+                // "# 1 filename" lines of output helps
                 includes.emplace_back(parts[2]);
                 command.args().push_back("-I" + parts[2]);
             }
