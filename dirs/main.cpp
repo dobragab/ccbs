@@ -45,9 +45,6 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    bool compile_only = false;
-    std::string compile_only_str = "-c";
-
     std::vector<std::string> gcc_args;
     gcc_args.reserve(std::size_t(argc));
     for (int i = 1; i < argc; ++i)

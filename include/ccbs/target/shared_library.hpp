@@ -24,7 +24,7 @@ public:
     }
     int prepare() override
     {
-        return build();
+        return build_rules();
     }
     void add_arguments(compiler& cc) const override;
 
