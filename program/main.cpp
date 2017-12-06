@@ -7,9 +7,9 @@ using namespace ccsh::literals;
 
 int main(int argc, const char ** argv)
 {
-    if (argc != 2)
+    if (argc < 2)
     {
-        std::cout << "Usage: ccbs <package.ccbs.hpp>";
+        std::cout << "Usage: ccbs <package.ccbs.hpp> <ARGS=values...>" << std::endl;
         return 1;
     }
 
@@ -66,9 +66,10 @@ int main(int argc, const char ** argv)
     std::string program =
     "#include <" + header.string() + ">\n" +
     R"PROGRAM(
-int main()
+int main(int argc, const char** argv)
 {
-    return (_CCBS_CLASSNAME_AUTOGEN){}.build();
+    auto opts = ccbs::parse_options(argc, argv);
+    return (_CCBS_CLASSNAME_AUTOGEN){}.build(opts);
 }
     )PROGRAM";
 
@@ -76,5 +77,9 @@ int main()
     if (result != 0)
         return result;
 
-    return ccsh::shell(output).run();
+    std::vector<std::string> args;
+    for (int i = 2; i < argc; ++i)
+        args.emplace_back(argv[i]);
+
+    return ccsh::shell(output, args).run();
 }

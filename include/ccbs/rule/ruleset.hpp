@@ -22,7 +22,7 @@ public:
     }
 
     int build(std::set<package*> const& dependencies);
-    static int build_dependencies(std::set<package*> const& dependencies);
+    static int build_dependencies(std::set<package*> const& dependencies, options&);
 };
 
 }

@@ -22,7 +22,7 @@ public:
     {
         return build_target::dependencies();
     }
-    int prepare() override
+    int prepare(options&) override
     {
         return build_rules();
     }

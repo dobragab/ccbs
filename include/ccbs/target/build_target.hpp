@@ -24,9 +24,9 @@ public:
         , cmd(std::move(cmd))
     {}
 
-    int build_dependencies();
-    int build_rules();
-    int build();
+    virtual int build_dependencies(options&);
+    virtual int build_rules();
+    virtual int build(options&);
 
     void sources(std::set<ccsh::fs::path> const& source_files)
     {

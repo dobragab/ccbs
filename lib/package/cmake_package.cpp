@@ -5,7 +5,7 @@ using namespace ccsh::literals;
 namespace ccbs
 {
 
-int cmake_package::prepare()
+int cmake_package::prepare(options&)
 {
     ccsh::command generate_command = ccsh::shell("cmake"_p, {basedir().string()});
     ccsh::command build_command = ccsh::shell("cmake"_p, {"--build", basedir().string()});

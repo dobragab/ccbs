@@ -15,7 +15,7 @@ public:
         , pkg_name(std::move(pkg_name))
     { }
     
-    int prepare() override
+    int prepare(options&) override
     {
         std::string output;
         return (ccsh::shell("pkg-config", {"--libs-only-l", pkg_name}) > output).run();

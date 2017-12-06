@@ -1,6 +1,8 @@
 #ifndef CCBS_PACKAGE_HPP
 #define CCBS_PACKAGE_HPP
 
+#include <ccbs/dirs/options.hpp>
+
 #include <ccbs/rule/timestamp.hpp>
 
 #include <ccbs/compiler/compiler.hpp>
@@ -15,7 +17,7 @@ namespace ccbs {
 class package
 {
 public:
-    virtual int prepare() = 0;
+    virtual int prepare(options&) = 0;
 
     virtual timestamp last_modified() const = 0;
 

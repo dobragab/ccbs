@@ -10,4 +10,6 @@
 
 #include <ccbs/util/visitors.hpp>
 
+#include <ccbs/dirs/options.hpp>
+
 #endif //PROJECT_CCBS_HPP

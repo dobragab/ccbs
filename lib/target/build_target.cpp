@@ -5,9 +5,9 @@
 namespace ccbs
 {
 
-int build_target::build_dependencies()
+int build_target::build_dependencies(options& options_)
 {
-    return ruleset::build_dependencies(dependencies());
+    return ruleset::build_dependencies(dependencies(), options_);
 }
 
 int build_target::build_rules()
@@ -46,9 +46,9 @@ int build_target::build_rules()
     return target.build(dependencies());
 }
 
-int build_target::build()
+int build_target::build(options& options_)
 {
-    int result1 = build_dependencies();
+    int result1 = build_dependencies(options_);
     if (result1 != 0)
         return result1;
 
