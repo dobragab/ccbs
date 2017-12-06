@@ -1,14 +1,7 @@
 #pragma ccbs /home/gabesz/git/ccsh/include
 #pragma ccbs /home/gabesz/git/ccsh/wrappers
 
-#include <ccbs/rule/ruleset.hpp>
-#include <ccbs/package/pkg_config_package.hpp>
-#include <ccbs/package/installed_package.hpp>
-
-#include <ccbs/target/shared_library.hpp>
-#include <ccbs/target/console_program.hpp>
-#include <ccbs/package/cmake_package.hpp>
-#include <ccbs/util/visitors.hpp>
+#include <ccbs/ccbs.hpp>
 
 using namespace ccsh::literals;
 
